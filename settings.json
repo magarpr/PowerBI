@@ -1,0 +1,9 @@
+{
+	"mailAccount": "Sarunas.Gerve@atea.lt",
+	"mailFolder": "Inbox",
+	"processedMailFolder": "Processed",
+	"errorMailAccount": "Sarunas.Gerve@atea.lt",
+	"errorMailCC": "Sarunas.Gerve@atea.lt",
+	"errorMailFolder": "Forwarded",
+	"powerBIFolder": "C:\\Users\\Sarunas.Gerve\\Documents\\UiPath\\PowerBIProject"
+}

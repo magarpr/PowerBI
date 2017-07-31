@@ -1,0 +1,263 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="errorHandling"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:s="clr-namespace:System;assembly=mscorlib"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:snm="clr-namespace:System.Net.Mail;assembly=System"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="errorMailAccount" Type="InArgument(x:String)" />
+    <x:Property Name="message" Type="InArgument(snm:MailMessage)" />
+    <x:Property Name="thrownError" Type="InOutArgument(s:Exception)" />
+    <x:Property Name="errorMailCC" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>errorHandling_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>UiPath.Credentials.Activities</x:String>
+      <x:String>UiPath.Database.Activities</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.CSV.Activities</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.CSV</x:String>
+      <x:String>UiPath.Checkpoint.Activities</x:String>
+      <x:String>UiPath.DataTable.Activities</x:String>
+      <x:String>UiPath.Dialog.Activities</x:String>
+      <x:String>UiPath.FileSystem.Activities</x:String>
+      <x:String>UiPath.Framework.Activities</x:String>
+      <x:String>UiPath.PowerShell.Activities</x:String>
+      <x:String>UiPath.RegEx.Activities</x:String>
+      <x:String>UiPath.FTP.Activities</x:String>
+      <x:String>UiPath.Mail.Activities</x:String>
+      <x:String>UiPath.Mail.Exchange.Activities</x:String>
+      <x:String>UiPath.Mail.IMAP.Activities</x:String>
+      <x:String>UiPath.Mail.Outlook.Activities</x:String>
+      <x:String>UiPath.Mail.POP3.Activities</x:String>
+      <x:String>UiPath.Mail.SMTP.Activities</x:String>
+      <x:String>UiPath.PDF.Activities</x:String>
+      <x:String>UiPath.XPS.Activities</x:String>
+      <x:String>UiPath.Enterprise.Activities.Assets</x:String>
+      <x:String>UiPath.Enterprise.Activities.Process</x:String>
+      <x:String>UiPath.Enterprise.Activities.Queues</x:String>
+      <x:String>UiPath.Enterprise.Activities</x:String>
+      <x:String>UiPath.Script.Activities</x:String>
+      <x:String>UiPath.Script.Activities.PowerShell</x:String>
+      <x:String>UiPath.Script.Activities.AutoHotKey</x:String>
+      <x:String>UiPath.Web</x:String>
+      <x:String>UiPath.Web.Activities</x:String>
+      <x:String>UiPath.JSON.Activities</x:String>
+      <x:String>UiPath.REST.Activities</x:String>
+      <x:String>UiPath.SOAP.Activities</x:String>
+      <x:String>UiPath.XML.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Core</AssemblyReference>
+      <AssemblyReference>UiPath.Core.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Credentials.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Database.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Framework.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.FTP.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.PDF.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Enterprise.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Script.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Web</AssemblyReference>
+      <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Error Handling" sap2010:WorkflowViewState.IdRef="Sequence_30">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="snm:MailMessage" Name="errorMail" />
+      <Variable x:TypeArguments="x:Object" Name="errorAttachments" />
+    </Sequence.Variables>
+    <Assign DisplayName="Create New Error Mail" sap2010:WorkflowViewState.IdRef="Assign_40">
+      <Assign.To>
+        <OutArgument x:TypeArguments="snm:MailMessage">[errorMail]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="snm:MailMessage">[new MailMessage()]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign DisplayName="Assign Mail Subject" sap2010:WorkflowViewState.IdRef="Assign_41">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[errorMail.Subject]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String" xml:space="preserve">[String.Format("Error processing mail:  {0} [{1}]", message.Subject, message.Headers("Date"))]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign DisplayName="Assign Mail Body" sap2010:WorkflowViewState.IdRef="Assign_42">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[errorMail.Body]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[String.Format("Error:{0}{1}{2}{3}Original mail:{4}{5}", System.Environment.NewLine , thrownError.Message, System.Environment.NewLine, System.Environment.NewLine, System.Environment.NewLine, message.Body)]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <If Condition="[message.Attachments.Count &gt; 0]" DisplayName="If There Are Attachments" sap2010:WorkflowViewState.IdRef="If_11">
+      <If.Then>
+        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_52">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="s:String[]" Name="fileNames" />
+          </Sequence.Variables>
+          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Prepare Folder for Saving Attachments" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="deleteFiles.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="x:String" x:Key="folder">Error</InArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
+          <ui:SaveMailAttachments Attachments="{x:Null}" DisplayName="Save Attachments" FolderPath="Error" sap2010:WorkflowViewState.IdRef="SaveMailAttachments_3" Message="[message]" />
+          <Assign DisplayName="Get All Error Attachment File Names" sap2010:WorkflowViewState.IdRef="Assign_45">
+            <Assign.To>
+              <OutArgument x:TypeArguments="s:String[]">[fileNames]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="s:String[]">[System.IO.Directory.GetFiles("Error\")]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <ui:ForEach x:TypeArguments="x:String" DisplayName="For each" sap2010:WorkflowViewState.IdRef="ForEach`1_15" Values="[fileNames]">
+            <ui:ForEach.Body>
+              <ActivityAction x:TypeArguments="x:String">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="x:String" Name="file" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Body" sap2010:WorkflowViewState.IdRef="Sequence_53">
+                  <Sequence.Variables>
+                    <Variable x:TypeArguments="snm:Attachment" Name="attachment" />
+                  </Sequence.Variables>
+                  <Assign DisplayName="Create Attachment" sap2010:WorkflowViewState.IdRef="Assign_46">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="snm:Attachment">[attachment]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="snm:Attachment">[new Attachment(file, System.Net.Mime.MediaTypeNames.Application.Octet)]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <InvokeMethod DisplayName="Add Attachment to Error Mail" sap2010:WorkflowViewState.IdRef="InvokeMethod_6" MethodName="Add">
+                    <InvokeMethod.TargetObject>
+                      <InArgument x:TypeArguments="snm:AttachmentCollection">[errorMail.Attachments]</InArgument>
+                    </InvokeMethod.TargetObject>
+                    <InArgument x:TypeArguments="snm:Attachment">[attachment]</InArgument>
+                  </InvokeMethod>
+                </Sequence>
+              </ActivityAction>
+            </ui:ForEach.Body>
+          </ui:ForEach>
+        </Sequence>
+      </If.Then>
+    </If>
+    <ui:SendOutlookMail Account="{x:Null}" Bcc="{x:Null}" Body="{x:Null}" Subject="{x:Null}" TimeoutMS="{x:Null}" Cc="[errorMailCC]" DisplayName="Send Mail for Manual Processing" sap2010:WorkflowViewState.IdRef="SendOutlookMail_1" IsBodyHtml="False" IsDraft="False" MailMessage="[errorMail]" To="[errorMailAccount]">
+      <ui:SendOutlookMail.Files>
+        <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4" />
+      </ui:SendOutlookMail.Files>
+    </ui:SendOutlookMail>
+    <InvokeMethod DisplayName="Dispose Error Mail" sap2010:WorkflowViewState.IdRef="InvokeMethod_7" MethodName="Dispose">
+      <InvokeMethod.TargetObject>
+        <InArgument x:TypeArguments="snm:MailMessage">[errorMail]</InArgument>
+      </InvokeMethod.TargetObject>
+    </InvokeMethod>
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Cleanup Error Attachments Folder" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="deleteFiles.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="folder">Error</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <Assign DisplayName="Remove Thrown Error" sap2010:WorkflowViewState.IdRef="Assign_29">
+      <Assign.To>
+        <OutArgument x:TypeArguments="s:Exception">[thrownError]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="s:Exception">[Nothing]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <sads:DebugSymbol.Symbol>d0JDOlxVc2Vyc1xTYXJ1bmFzLkdlcnZlXERvY3VtZW50c1xVaVBhdGhcUG93ZXJCSVxlcnJvckhhbmRsaW5nLnhhbWwqdgPeAQ4CAQF7BYIBDgIBO4MBBYoBDgIBNYsBBZIBDgIBL5MBBcUBCgIBE8YBBcoBGgIBDMsBBc8BFAIBCdABBdQBHQIBBtUBBdwBDgIBAoABN4ABSgIBPn04fUMCATyFATGFAUQCATaQATCQAf0BAgEyjQExjQFBAgEwkwETkwE3AgEUlQEJwwEUAgEWxgGoAsYBvAICARHGAXbGAYUBAgEPxgGXAsYBpAICAQ3NATfNAUICAQrSAT/SAUQCAQjQAb0B0AHPAQIBB9oBM9oBPAIBBdcBNNcBQQIBA5kBC50BIwIBLJ4BC54BugECASifAQumARQCASSnAQvCARgCARebAUWbAUoCAS6ZAcgBmQHaAQIBLZ4BrAGeAbcBAgEqngFkngFrAgEppAE4pAFgAgEnoQE5oQFEAgElpwF/pwGMAQIBIq0BEb8BHAIBGLEBE7gBHAIBHrkBE74BIgIBGbYBRLYBjAECASGzAUWzAVECAR+7AU67AWUCARy9AUK9AU4CARo=</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="Assign_40" sap:VirtualizedContainerService.HintSize="464,60" />
+      <sap2010:ViewStateData Id="Assign_41" sap:VirtualizedContainerService.HintSize="464,60" />
+      <sap2010:ViewStateData Id="Assign_42" sap:VirtualizedContainerService.HintSize="464,60" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_2" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="SaveMailAttachments_3" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="Assign_45" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Assign_46" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="InvokeMethod_6" sap:VirtualizedContainerService.HintSize="242,132" />
+      <sap2010:ViewStateData Id="Sequence_53" sap:VirtualizedContainerService.HintSize="264,356">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEach`1_15" sap:VirtualizedContainerService.HintSize="314,490" />
+      <sap2010:ViewStateData Id="Sequence_52" sap:VirtualizedContainerService.HintSize="336,968">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_11" sap:VirtualizedContainerService.HintSize="464,1116" />
+      <sap2010:ViewStateData Id="SendOutlookMail_1" sap:VirtualizedContainerService.HintSize="464,145" />
+      <sap2010:ViewStateData Id="InvokeMethod_7" sap:VirtualizedContainerService.HintSize="464,132" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_3" sap:VirtualizedContainerService.HintSize="464,87" />
+      <sap2010:ViewStateData Id="Assign_29" sap:VirtualizedContainerService.HintSize="464,60" />
+      <sap2010:ViewStateData Id="Sequence_30" sap:VirtualizedContainerService.HintSize="486,2124">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="errorHandling_1" sap:VirtualizedContainerService.HintSize="526,2204" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

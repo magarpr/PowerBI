@@ -1,0 +1,12 @@
+{
+  "description": "PowerBI reports publishing automation",
+  "version": "2016.2.6344.28632",
+  "main": "Main.xaml",
+  "id": "PowerBI",
+  "dependencies": {},
+  "configurationOptions": {},
+  "excludedData": [
+    "Private:*",
+    "*password*"
+  ]
+}
